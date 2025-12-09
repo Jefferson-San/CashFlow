@@ -1,5 +1,4 @@
-﻿
-using CashFlow.Domain.Entities;
+﻿using CashFlow.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace CashFlow.Infrastructure.Repository;

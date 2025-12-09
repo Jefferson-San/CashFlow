@@ -1,4 +1,5 @@
-﻿using CashFlow.Infrastructure.Context;
+﻿using CashFlow.Domain.Repository;
+using CashFlow.Infrastructure.Context;
 
 namespace CashFlow.Infrastructure.Repository;
 

@@ -2,7 +2,6 @@
 using CashFlow.Application.Common;
 using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repository;
-using CashFlow.Infrastructure.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
 namespace CashFlow.Application.Commands.CreateExpense;

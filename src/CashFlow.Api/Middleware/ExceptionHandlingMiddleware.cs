@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using Error = CashFlow.Application.Common.Error;
 
-namespace CashFlow.Api.Filters;
+namespace CashFlow.Api.Middleware;
 
 public class ExceptionHandlingMiddleware
 {
