@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CashFlow.Application.Commands.CreateExpense;
+using CashFlow.Application.DTO.ViewModel.Expense;
 using CashFlow.Domain.Entities;
 
 namespace CashFlow.Application.Mapper;
@@ -18,6 +19,6 @@ public class AutoMapperConfig : Profile
 
     private void MapToViewModel()
     {
-
+        CreateMap<Expense, DetailsExpenseDto>();
     }
 }
