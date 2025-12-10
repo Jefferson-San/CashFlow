@@ -1,12 +1,9 @@
 ﻿using CashFlow.Application.Common;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using System.Text.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Error = CashFlow.Application.Common.Error;
 
-namespace CashFlow.Api.Filters;
+namespace CashFlow.Api.Middleware;
 
 public class ExceptionHandlingMiddleware
 {

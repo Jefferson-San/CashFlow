@@ -1,14 +1,14 @@
-﻿
-using CashFlow.Domain.Entities;
+﻿using CashFlow.Domain.Repository;
+using CashFlow.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CashFlow.Infrastructure.Repository;
 
 public class ReadOnlyRepositoryAsync<T> : IReadOnlyRepository<T> where T : class
 {
-    private readonly DbContext _dbContext;
+    private readonly CashFlowDbContext _dbContext;
 
-    public ReadOnlyRepositoryAsync(DbContext dbContext) { _dbContext = dbContext; }
+    public ReadOnlyRepositoryAsync(CashFlowDbContext dbContext) { _dbContext = dbContext; }
 
     public async Task<List<T>> GetAllAsync() => await _dbContext.Set<T>().AsNoTracking().ToListAsync();
 

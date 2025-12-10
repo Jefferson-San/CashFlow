@@ -5,7 +5,7 @@ using Flunt.Validations;
 using MediatR;
 
 namespace CashFlow.Application.Commands.CreateExpense;
-public class CreateExpenseCommand : Notifiable<Notification>, IRequest<ResultViewModel<string>> 
+public class CreateExpenseCommand : Notifiable<Notification>, IRequest<ResultViewModel<Guid>> 
 {
     public string? Title { get; set; }
     public string? Description { get; set; }
@@ -18,10 +18,8 @@ public class CreateExpenseCommand : Notifiable<Notification>, IRequest<ResultVie
             new Contract<CreateExpenseCommand>()
             .Requires()
             .IsNotNullOrEmpty(Title, "Title")
-            .IsNotNullOrEmpty(Description, "Description")
             .IsGreaterThan(0, Amount, "Amount")
             .IsTrue(Enum.IsDefined(typeof(PaymentType), PaymentType), "PaymentType", "Invalid value")
             );
     }
-
 }

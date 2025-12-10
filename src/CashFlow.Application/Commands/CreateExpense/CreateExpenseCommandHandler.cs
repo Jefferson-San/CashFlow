@@ -1,22 +1,31 @@
-﻿using CashFlow.Application.Common;
+﻿using AutoMapper;
+using CashFlow.Application.Common;
 using CashFlow.Domain.Entities;
-using CashFlow.Infrastructure.Repository;
+using CashFlow.Domain.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
 namespace CashFlow.Application.Commands.CreateExpense;
 
-public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, ResultViewModel<string>>
+public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, ResultViewModel<Guid>>
 {
-    private readonly IWriteOnlyRepository<Expense> _writeRepository;
+    private readonly IWriteOnlyRepository<Expense> _writeExpenseRepository;
     private readonly ILogger<CreateExpenseCommandHandler> _logger;
+    private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateExpenseCommandHandler(IWriteOnlyRepository<Expense> writeRepository, ILogger<CreateExpenseCommandHandler> logger)
+    public CreateExpenseCommandHandler(
+        IWriteOnlyRepository<Expense> writeRepository, 
+        ILogger<CreateExpenseCommandHandler> logger, 
+        IMapper mapper, 
+        IUnitOfWork unitOfWork)
     {
-        _writeRepository = writeRepository;
+        _writeExpenseRepository = writeRepository;
         _logger = logger;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<ResultViewModel<string>> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel<Guid>> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Iniciando com request {@Request}", request);
         request.Validate();
@@ -24,13 +33,19 @@ public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand,
         if (!request.IsValid)
         {
             _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
-            return ResultViewModel<string>.Failure(
+            return ResultViewModel<Guid>.Failure(
                  Error.Validation("Ocorreram erros de validação", request.Notifications));
         }
 
+        var entity = _mapper.Map<Expense>(request);
 
+        _logger.LogDebug("Query para adição no banco criada, com a despesa: {@Entity}", entity);
+        _writeExpenseRepository.Add(entity);
 
-        return ResultViewModel<string>.Success("Ola");
+        _logger.LogDebug("Adicionando despesa no banco");
+        _unitOfWork.Commit();
+
+        return ResultViewModel<Guid>.Success(entity.Id);
     }
 
 }
