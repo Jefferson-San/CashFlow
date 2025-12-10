@@ -1,4 +1,4 @@
-using CashFlow.Api.Filters;
+using CashFlow.Api.Middleware;
 using CashFlow.Application;
 using CashFlow.Infrastructure;
 using MediatR;
