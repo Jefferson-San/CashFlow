@@ -6,7 +6,7 @@ using CashFlow.Domain.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace CashFlow.Application.Queries.DetailsExpense;
+namespace CashFlow.Application.Queries.Expenses.DetailsExpense;
 
 public class DetailsExpenseQueryHandler : IRequestHandler<DetailsExpenseQuery, ResultViewModel<DetailsExpenseDto>>
 {
@@ -24,7 +24,7 @@ public class DetailsExpenseQueryHandler : IRequestHandler<DetailsExpenseQuery, R
     public async Task<ResultViewModel<DetailsExpenseDto>> Handle(DetailsExpenseQuery request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Iniciando busca com Expense com id: {@Id}", request.Id);
-        Expense entity = await _readExpenseRepository.GetByIdAsync(request.Id);
+        var entity = await _readExpenseRepository.GetByIdAsync(request.Id);
 
         if (entity is null)
         {

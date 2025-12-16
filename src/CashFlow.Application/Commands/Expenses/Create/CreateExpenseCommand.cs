@@ -4,7 +4,7 @@ using Flunt.Notifications;
 using Flunt.Validations;
 using MediatR;
 
-namespace CashFlow.Application.Commands.CreateExpense;
+namespace CashFlow.Application.Commands.Expenses.Create;
 public class CreateExpenseCommand : Notifiable<Notification>, IRequest<ResultViewModel<Guid>> 
 {
     public string? Title { get; set; }

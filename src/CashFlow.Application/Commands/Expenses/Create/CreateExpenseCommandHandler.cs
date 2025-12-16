@@ -4,7 +4,7 @@ using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
-namespace CashFlow.Application.Commands.CreateExpense;
+namespace CashFlow.Application.Commands.Expenses.Create;
 
 public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, ResultViewModel<Guid>>
 {
