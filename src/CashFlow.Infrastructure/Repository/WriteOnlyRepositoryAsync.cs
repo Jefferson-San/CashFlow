@@ -15,6 +15,6 @@ public class WriteOnlyRepositoryAsync<T> : IWriteOnlyRepository<T> where T : cla
 
     public void DeleteById(T entity) => _dbContext.Remove(entity);
 
-    public async Task UpdateById(T entity) => _dbContext.Update(entity);
+    public void Update(T entity) => _dbContext.Update(entity);
     
 }

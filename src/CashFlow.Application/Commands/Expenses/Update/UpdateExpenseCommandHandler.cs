@@ -53,7 +53,7 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
 
         Expense entity = _mapper.Map<Expense>(result);
 
-        _writeExpenseRepository.UpdateById(entity);
+        _writeExpenseRepository.Update(entity);
 
         _unitOfWork.Commit();
 
