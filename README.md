@@ -1,13 +1,13 @@
-## 📌 CashFlow — Sistema de Gerenciamento de Despesas
+## 📌 CashFlow — Expense Management System
 
-Um projeto completo para **gestão de despesas**, desenvolvido com **Clean Architecture**, **princípios SOLID**, **CQRS-lite + MediatR**, **Docker**, **CI/CD**, **caching** e **foco total em escalabilidade**.
+A complete project for **expense management**, developed with **Clean Architecture**, **SOLID principles**, **CQRS-lite + MediatR**, **Docker**, **CI/CD**, **caching**, and **total focus on scalability**.
 
-**Objetivo**: Desenvolver uma base sólida para aplicações modernas, aplicando boas práticas de arquitetura, padrões de projeto e técnicas que promovam um código limpo, desacoplado, testável e escalável.
+**Objective:** To develop a solid foundation for modern applications by applying good architectural practices, design patterns, and techniques that promote clean, decoupled, testable, and scalable code.
 
 ---
 
 
-# 🚀 Tecnologias Utilizadas
+# 🚀 Technologies Used
 
 - **ASP.NET Core 8**
 - **C# 12**
@@ -18,14 +18,14 @@ Um projeto completo para **gestão de despesas**, desenvolvido com **Clean Archi
 - **PostgreSQL**
 - **Docker**
 - **Migrations EF Core**
-- (em construção) **Testes automatizados com xUnit**
-- (em construção) **Caching com Redis**
-- (em construção) **Autenticação / Autorização**
-- (em construção) **Integração com Grafana e Prometheus para métricas e observabilidade**
+- (under construction) **Automated testing with xUnit**
+- (under construction) **Caching with Redis**
+- (under construction) **Authentication / Authorization**
+- (Under construction) **Integration with Grafana and Prometheus for metrics and observability**
 
-# Arquitetura
+# Architecture
 
-O projeto segue os princípios da Clean Architecture, dividido em camadas:
+The project follows the principles of Clean Architecture, divided into layers
 
 - 📁 CashFlow.Api             → Endpoints / Controllers / Swagger
 - 📁 CashFlow.Application     → Use Cases, CQRS (Commands/Queries), Validators
