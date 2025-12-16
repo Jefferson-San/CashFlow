@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CashFlow.Application.Commands.CreateExpense;
+using CashFlow.Application.Commands.Expenses.Create;
 using CashFlow.Application.DTO.ViewModel.Expense;
 using CashFlow.Domain.Entities;
 

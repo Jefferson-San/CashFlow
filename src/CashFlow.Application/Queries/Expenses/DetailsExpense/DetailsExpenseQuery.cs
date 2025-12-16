@@ -4,7 +4,7 @@ using Flunt.Notifications;
 using Flunt.Validations;
 using MediatR;
 
-namespace CashFlow.Application.Queries.DetailsExpense;
+namespace CashFlow.Application.Queries.Expenses.DetailsExpense;
 public class DetailsExpenseQuery : Notifiable<Notification>, IRequest<ResultViewModel<DetailsExpenseDto>>
 {
     public DetailsExpenseQuery(Guid id)

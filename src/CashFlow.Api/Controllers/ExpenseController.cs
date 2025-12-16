@@ -1,4 +1,5 @@
-﻿using CashFlow.Application.Commands.CreateExpense;
+﻿using CashFlow.Application.Commands.Expenses.Create;
+using CashFlow.Application.Commands.Expenses.Update;
 using CashFlow.Application.Queries.DetailsExpense;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,16 @@ namespace CashFlow.Api.Controllers
         public async Task<IActionResult> GetExpenseById(Guid id)
         {
             var result = await _mediator.Send(new DetailsExpenseQuery(id));
+            if(!result.IsSuccess)
+                return BadRequest(result.Error);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateExpense([FromBody] UpdateExpenseCommand request)
+        {
+            var result = await _mediator.Send(request);
             if(!result.IsSuccess)
                 return BadRequest(result.Error);
 
