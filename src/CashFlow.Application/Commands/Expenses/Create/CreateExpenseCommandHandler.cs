@@ -42,8 +42,8 @@ public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand,
         _logger.LogDebug("Query para adição no banco criada, com a despesa: {@Entity}", entity);
         _writeExpenseRepository.Add(entity);
 
-        _logger.LogDebug("Adicionando despesa no banco");
-        _unitOfWork.Commit();
+        _logger.LogDebug("Salvando alterações no banco");
+        await _unitOfWork.CommitAsync();
 
         return ResultViewModel<Guid>.Success(entity.Id);
     }
