@@ -53,9 +53,11 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
 
         Expense entity = _mapper.Map<Expense>(result);
 
-        _writeExpenseRepository.UpdateById(entity);
+        _logger.LogDebug("Query para atualização no banco criada, com a despesa: {@Entity}", entity);
+        _writeExpenseRepository.Update(entity);
 
-        _unitOfWork.Commit();
+        _logger.LogDebug("Salvando alterações no banco");
+        await _unitOfWork.CommitAsync();
 
         return ResultViewModel<Guid>.Success(entity.Id);
     }
