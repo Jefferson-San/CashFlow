@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.Commands.Expenses.Create;
+using CashFlow.Application.Commands.Expenses.Delete;
 using CashFlow.Application.Commands.Expenses.Update;
 using CashFlow.Application.Queries.Expenses.DetailsExpense;
 using MediatR;
@@ -41,6 +42,16 @@ public class ExpenseController : ControllerBase
     public async Task<IActionResult> UpdateExpense([FromBody] UpdateExpenseCommand request)
     {
         var result = await _mediator.Send(request);
+        if(!result.IsSuccess)
+            return BadRequest(result.Error);
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteExpense(Guid id)
+    {
+        var result = await _mediator.Send(new DeleteExpenseCommand(id));
         if(!result.IsSuccess)
             return BadRequest(result.Error);
 
