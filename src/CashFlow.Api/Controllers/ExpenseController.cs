@@ -1,6 +1,5 @@
 ﻿using CashFlow.Application.Commands.Expenses.Create;
 using CashFlow.Application.Commands.Expenses.Update;
-using CashFlow.Application.Queries.DetailsExpense;
 using CashFlow.Application.Queries.Expenses.DetailsExpense;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
