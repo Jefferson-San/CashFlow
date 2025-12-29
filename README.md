@@ -28,7 +28,7 @@ A complete project for **expense management**, developed with **Clean Architectu
 The project follows the principles of Clean Architecture, divided into layers
 
 - 📁 CashFlow.Api             → Endpoints / Controllers / Swagger
-- 📁 CashFlow.Application     → Use Cases, CQRS (Commands/Queries), Validators
-- 📁 CashFlow.Domain          → Entidades, Interfaces, Models, Regras de domínio
-- 📁 CashFlow.Infrastructure  → Persistence (EF Core), Repositórios, Migrations, Redis
+- 📁 CashFlow.Application     → Use Cases, CQRS-lite (Commands/Queries), Validators
+- 📁 CashFlow.Domain          → Entities, Interfaces, Models, Domain Rules
+- 📁 CashFlow.Infrastructure  → Persistence (EF Core), Repositories, Migrations, Redis
 - 📁 CashFlow.Tests           → Unit & Integration Tests
