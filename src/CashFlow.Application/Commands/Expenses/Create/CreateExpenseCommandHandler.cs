@@ -38,7 +38,6 @@ public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand,
         }
 
         var entity = _mapper.Map<Expense>(request);
-
         _logger.LogDebug("Query para adição no banco criada, com a despesa: {@Entity}", entity);
         _writeExpenseRepository.Add(entity);
 
