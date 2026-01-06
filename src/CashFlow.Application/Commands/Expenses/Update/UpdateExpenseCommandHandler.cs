@@ -51,7 +51,7 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
                 "", request.Notifications));
         }
 
-        Expense entity = _mapper.Map<Expense>(result);
+        Expense entity = _mapper.Map<Expense>(request);
 
         _logger.LogDebug("Query para atualização no banco criada, com a despesa: {@Entity}", entity);
         _writeExpenseRepository.Update(entity);

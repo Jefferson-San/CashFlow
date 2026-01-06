@@ -18,7 +18,7 @@ public class CreateExpenseCommand : Notifiable<Notification>, IRequest<ResultVie
             new Contract<CreateExpenseCommand>()
             .Requires()
             .IsNotNullOrEmpty(Title, "Title")
-            .IsGreaterThan(0, Amount, "Amount")
+            .IsGreaterThan(Amount, 0, "Amount")
             .IsTrue(Enum.IsDefined(typeof(PaymentType), PaymentType), "PaymentType", "Invalid value")
             );
     }

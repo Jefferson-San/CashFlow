@@ -8,7 +8,7 @@ using MediatR;
 namespace CashFlow.Application.Commands.Expenses.Update;
 public class UpdateExpenseCommand : Notifiable<Notification>, IRequest<ResultViewModel<Guid>>
 {
-    public Guid Id { get; }
+    public Guid Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public decimal Amount { get; set; }
@@ -21,7 +21,7 @@ public class UpdateExpenseCommand : Notifiable<Notification>, IRequest<ResultVie
             .Requires()
             .IsNotEmpty(Id, "Id")
             .IsNotNullOrEmpty(Title, "Title")
-            .IsGreaterThan(0, Amount, "Amount")
+            .IsGreaterThan(Amount, 0, "Amount")
             .IsTrue(Enum.IsDefined(typeof(PaymentType), PaymentType), "PaymentType", "Invalid value")
             );
     }

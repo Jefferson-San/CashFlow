@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CashFlow.Application.Commands.Expenses.Create;
+using CashFlow.Application.Commands.Expenses.Update;
 using CashFlow.Application.DTO.ViewModel.Expense;
 using CashFlow.Domain.Entities;
 
@@ -15,6 +16,7 @@ public class AutoMapperConfig : Profile
     private void MapToEntity()
     {
         CreateMap<CreateExpenseCommand, Expense>();
+        CreateMap<UpdateExpenseCommand, Expense>();
     }
 
     private void MapToViewModel()
