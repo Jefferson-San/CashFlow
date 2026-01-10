@@ -27,21 +27,21 @@ public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand,
 
     public async Task<ResultViewModel<Guid>> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando com request {@Request}", request);
+        _logger.LogInformation("Starting with request {@Request}", request);
         request.Validate();
 
         if (!request.IsValid)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             return ResultViewModel<Guid>.Failure(
-                 Error.Validation("Ocorreram erros de validação", request.Notifications));
+                 Error.Validation("Validation errors occurred", request.Notifications));
         }
 
         var entity = _mapper.Map<Expense>(request);
-        _logger.LogDebug("Query para adição no banco criada, com a despesa: {@Entity}", entity);
+        _logger.LogDebug("Insert query created for database, with expense: {@Entity}", entity);
         _writeExpenseRepository.Add(entity);
 
-        _logger.LogDebug("Salvando alterações no banco");
+        _logger.LogDebug("Saving changes to database");
         await _unitOfWork.CommitAsync();
 
         return ResultViewModel<Guid>.Success(entity.Id);

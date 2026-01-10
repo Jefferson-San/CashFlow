@@ -31,21 +31,21 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
     }
     public async Task<ResultViewModel<Guid>> Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando com request: {@Request}", request);
+        _logger.LogInformation("Starting with request: {@Request}", request);
         request.Validate();
 
         if (!request.IsValid)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             return ResultViewModel<Guid>.Failure(
-                Error.Validation("Ocorreram erros de validação", request.Notifications));
+                Error.Validation("Validation errors occurred", request.Notifications));
         }
 
         var result = await _readExpenseRepository.GetByIdAsync(request.Id);
 
         if (result is null)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             request.AddNotificationNotFound();
             return ResultViewModel<Guid>.Failure(Error.NotFound(
                 "", request.Notifications));
@@ -53,10 +53,10 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
 
         Expense entity = _mapper.Map<Expense>(request);
 
-        _logger.LogDebug("Query para atualização no banco criada, com a despesa: {@Entity}", entity);
+        _logger.LogDebug("Update query created for database, with expense: {@Entity}", entity);
         _writeExpenseRepository.Update(entity);
 
-        _logger.LogDebug("Salvando alterações no banco");
+        _logger.LogDebug("Saving changes to database");
         await _unitOfWork.CommitAsync();
 
         return ResultViewModel<Guid>.Success(entity.Id);

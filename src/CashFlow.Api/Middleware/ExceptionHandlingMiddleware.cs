@@ -24,13 +24,13 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Erro não tratado. TraceId={TraceId}", context.TraceIdentifier);
+            _logger.LogError(ex, "Unhandled error. TraceId={TraceId}", context.TraceIdentifier);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             Error error = Error.Failure(
-                message: "Ocorreu um erro desconhecido",
+                message: "An unknown error occurred",
                 notifications: null
                 );
 
