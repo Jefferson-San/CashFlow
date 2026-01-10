@@ -25,31 +25,31 @@ public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand,
     }
     public async Task<ResultViewModel<Guid>> Handle(DeleteExpenseCommand request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando request com Id: {@Request}", request.Id);
+        _logger.LogInformation("Starting request with Id: {@Request}", request.Id);
         request.Validation();
         
         if (!request.IsValid)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             return ResultViewModel<Guid>.Failure(
-                Error.Validation("Erro de validação", request.Notifications));
+                Error.Validation("Validation error", request.Notifications));
         }
 
         var entity = await _readExpenseRepository.GetByIdAsync(request.Id);
         if (entity is null)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             request.AddNotificationNotFound();
             return ResultViewModel<Guid>.Failure(Error.NotFound(
-                "Despesa não encontrada", request.Notifications));
+                "Expense not found", request.Notifications));
         }
 
         entity.SetDelete();
 
-        _logger.LogDebug("Query para remoção no banco criada, com a despesa: {@Entity}", entity);
+        _logger.LogDebug("Delete query created for database, with expense: {@Entity}", entity);
         _writeExpenseRepository.Update(entity);
 
-        _logger.LogDebug("Salvando alterações no banco");
+        _logger.LogDebug("Saving changes to database");
         await _unitOfWork.CommitAsync();
 
         return ResultViewModel<Guid>.Success(request.Id);

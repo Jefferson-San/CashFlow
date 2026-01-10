@@ -23,12 +23,12 @@ public class DetailsExpenseQueryHandler : IRequestHandler<DetailsExpenseQuery, R
 
     public async Task<ResultViewModel<DetailsExpenseDto>> Handle(DetailsExpenseQuery request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando busca com Expense com id: {@Id}", request.Id);
+        _logger.LogInformation("Starting search for Expense with id: {@Id}", request.Id);
         var entity = await _readExpenseRepository.GetByIdAsync(request.Id);
 
         if (entity is null)
         {
-            _logger.LogDebug("Erro tratado {@Erro}", request.Notifications);
+            _logger.LogDebug("Error handled {@Error}", request.Notifications);
             request.AddNotificationNotFound();
             return ResultViewModel<DetailsExpenseDto>.Failure(Error.NotFound(
                 "", request.Notifications));
